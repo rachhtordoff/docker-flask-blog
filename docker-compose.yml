@@ -1,5 +1,5 @@
 postgres:
-  build: ./postgres
+  build: applications/postgres
   ports:
     - "5432:5432"
 
@@ -9,10 +9,10 @@ flaskapp:
   links:
     - postgres
   volumes:
-    - /vagrant/applications/flaskapp/src:/opt/flaskapp
+    - /vagrant/applications/flaskapp:/opt/flaskapp
 
 proxy:
-  build: ./proxy
+  build: applications/proxy
   ports:
     - "80:80"
   volumes:
