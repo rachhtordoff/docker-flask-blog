@@ -3,19 +3,29 @@ postgres:
   ports:
     - "5432:5432"
 
+oauthapi:
+  build: applications/oauth-api
+  command: "python3 run.py"
+  links:
+    - postgres
+  volumes:
+    - /vagrant/applications/oauth-api:/opt/oauth-api
+
 flaskapp:
   build: applications/flaskapp
   command: "python3 hello.py"
   links:
     - postgres
+    - oauthapi
   volumes:
     - /vagrant/applications/flaskapp:/opt/flaskapp
 
 proxy:
-  build: applications/proxy
+  build: ./proxy
   ports:
     - "80:80"
   volumes:
     - /vagrant/proxy/sites-enabled:/etc/nginx/sites-enabled
   links:
     - flaskapp
+    - oauthapi
