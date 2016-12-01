@@ -1,13 +1,32 @@
-from src import app, facebook
-from flask import render_template, url_for, request, session
+from flask import Flask, url_for, request, session
+from flask_oauthlib.client import OAuth
+
+app = Flask(__name__)
+
+SECRET_KEY = 'development key'
+DEBUG = True
+FACEBOOK_APP_ID = '1239932412696644'
+FACEBOOK_APP_SECRET = 'be4160f4485e2e1a9cb3e226cf801f3b'
+
+app.debug = DEBUG
+app.secret_key = SECRET_KEY
+oauth = OAuth()
+
+facebook = oauth.remote_app('facebook',
+    base_url='https://graph.facebook.com/',
+    request_token_url=None,
+    access_token_url='/oauth/access_token',
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    consumer_key=FACEBOOK_APP_ID,
+    consumer_secret=FACEBOOK_APP_SECRET,
+    request_token_params={'scope': 'email'}
+)
 
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Migueldkkdjl'}  # fake user
-    return render_template('index.html',
-                           title='Home',
-                           user=user)
+    return "hey"
+
 
 @app.route('/login')
 def login():
@@ -24,7 +43,6 @@ def facebook_authorized(resp):
             request.args['error_reason'],
             request.args['error_description']
         )
-    session['logged_in'] = True
     session['oauth_token'] = (resp['access_token'], '')
     me = facebook.get('/me')
     return 'Logged in as id=%s name=%s redirect=%s' % \
@@ -34,15 +52,3 @@ def facebook_authorized(resp):
 @facebook.tokengetter
 def get_facebook_oauth_token():
     return session.get('oauth_token')
-
-def pop_login_session():
-    session.pop('logged_in', None)
-    session.pop('oauth_token', None)
-    if session.get('oauth_token') is None:
-        return "success"
-    return "unsuccess"
-
-@app.route("/logout")
-def logout():
-    logout = pop_login_session()
-    return logout
