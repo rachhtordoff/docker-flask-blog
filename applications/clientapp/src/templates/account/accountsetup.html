@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+Hi {{username}}, please set up your account.
+<form action="/accountsetup" method="POST" name="login">
+</br>
+{{accountsetupform.title.label}}
+{{accountsetupform.title }}</br>
+
+{{accountsetupform.firstname.label}}
+{{accountsetupform.firstname}}</br>
+
+{{accountsetupform.lastname.label}}
+{{accountsetupform.lastname}}</br>
+
+{{accountsetupform.dob.label}}
+{{accountsetupform.dob}}</br>
+
+{{accountsetupform.gender.label}}
+{{accountsetupform.gender}}</br>
+
+
+{{accountsetupform.email.label}}
+{{accountsetupform.email}}</br>
+
+{{accountsetupform.number.label}}
+{{accountsetupform.number}}</br>
+
+<p><input type="submit" value="Save and Continue"></p>
+</form>
+
+{% endblock %}

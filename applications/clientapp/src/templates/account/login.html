@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+  <h1>Sign In</h1>
+  <form action="/login" method="POST" name="login">
+      <p>
+        {{loginform.username}}
+        {{loginform.password}}
+        {{loginform.remember_me}}
+          Please enter your Email <address class="">
+
+      <p><input type="submit" value="Sign In"></p>
+  </form>
+{% endblock %}

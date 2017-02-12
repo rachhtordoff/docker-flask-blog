@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+
+<h2>{{username}}, please take your time in filling out the questionnaire bellow.</h2>
+<form action="/accountquestionairre" method="POST" name="login">
+<h3>Multiple choice</h3>
+{{accountquestionairreForm.question1.label}}
+{{accountquestionairreForm.question1}}</br>
+
+{{accountquestionairreForm.question2a.label}}
+{{accountquestionairreForm.question2a}}
+{{accountquestionairreForm.question2b}}</br>
+
+{{accountquestionairreForm.question3.label}}
+{{accountquestionairreForm.question3}}</br>
+
+{{accountquestionairreForm.question4.label}}
+{{accountquestionairreForm.question4}}</br>
+
+{{accountquestionairreForm.question5.label}}
+{{accountquestionairreForm.question5}}</br>
+
+{{accountquestionairreForm.question6.label}}
+{{accountquestionairreForm.question6}}</br>
+
+{{accountquestionairreForm.question7.label}}
+{{accountquestionairreForm.question7}}</br>
+
+{{accountquestionairreForm.question8.label}}
+{{accountquestionairreForm.question8}}</br>
+
+{{accountquestionairreForm.question9.label}}
+{{accountquestionairreForm.question9}}</br>
+
+{{accountquestionairreForm.question10.label}}
+{{accountquestionairreForm.question10}}</br>
+
+
+{{accountquestionairreForm.question11.label}}
+{{accountquestionairreForm.question11}}</br>
+
+{{accountquestionairreForm.question12.label}}
+{{accountquestionairreForm.question12}}</br>
+
+<p><input type="submit" value="Save and Continue"></p>
+</form>
+
+{% endblock %}
